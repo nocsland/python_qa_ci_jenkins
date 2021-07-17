@@ -1,5 +1,4 @@
 import allure
-import pytest
 from page_objects.MainPage import MainPage
 
 
@@ -38,14 +37,17 @@ def test_find_el_main(browser):
 @allure.title("Добавление нового пользователя")
 @allure.description("""Тест проверяет возможность добавить нового пользователя""")
 @allure.severity(allure.severity_level.CRITICAL)
-@pytest.mark.skip(reason="Пользователь уже существует")
 def test_add_new_user(browser):
     main_page = MainPage(browser).open()
-    allure.attach.file(source='tests/attachments/add_user.png', attachment_type=allure.attachment_type.PNG)
     main_page.click_add_user()
-    main_page.fill_register_form('Ivan15', 'Ivanov15', 'test15@ya.ru', '+79000551135', 'test')
+    main_page.fill_register_form('Ivan', 'Ivanov', 'test@ya.ru', '+79000551135', 'test')
     main_page.click_agree_and_continue()
     main_page.verify_title('My Account')
+    main_page.open_admin()
+    main_page.login('user', 'bitnami')
+    main_page.verify_title('Dashboard')
+    main_page.goto_all_customers()
+    main_page.delete_customer()
 
 
 @allure.parent_suite("Проверка тестового магазина opencart")

@@ -30,7 +30,7 @@ def test_add_product(browser):
     admin_page = AdminPage(browser).open()
     admin_page.login('user', 'bitnami')
     admin_page.verify_title('Dashboard')
-    admin_page.goto_all_product()
+    admin_page.goto_all_products()
     admin_page.verify_title('Products')
     admin_page.click_add_product()
     admin_page.fill_general_form_product('test', 'test')
@@ -50,7 +50,7 @@ def test_add_product(browser):
 def test_delete_product(browser):
     admin_page = AdminPage(browser).open()
     admin_page.login('user', 'bitnami')
-    admin_page.goto_all_product()
+    admin_page.goto_all_products()
     admin_page.verify_title('Products')
     admin_page.find_and_delete_product()
     admin_page.switch_to_alert_and_ok()

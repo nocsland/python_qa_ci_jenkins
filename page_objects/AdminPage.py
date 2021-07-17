@@ -29,19 +29,12 @@ class AdminPage(BasePage):
         self.logger.info("element was found")
         return self
 
-    def login(self, login, password):
-        self.browser.find_element_by_name('username').clear()
-        self.browser.find_element_by_name('username').send_keys(login)
-        self.browser.find_element_by_id('input-password').clear()
-        self.browser.find_element_by_id('input-password').send_keys(password)
-        self.browser.find_element_by_xpath('//button[contains(.," Login")]').click()
-        self.logger.info("login completed")
-        return self
 
-    def goto_all_product(self):
+
+    def goto_all_products(self):
         self.browser.find_element_by_id('menu-catalog').click()
         self.browser.find_element_by_xpath('//a[contains(text(),"Products")]').click()
-        self.logger.info('navigated to the product page')
+        self.logger.info('navigated to the all products page')
         return self
 
     def click_add_product(self):
@@ -71,7 +64,9 @@ class AdminPage(BasePage):
         return self
 
     def find_and_delete_product(self):
-        self.browser.find_element_by_xpath('//tr[20]/td/input').click()
+        self.browser.find_element_by_xpath('//tr/td[3][contains(text(),"test")]/..//input').click()
         self.browser.find_element_by_css_selector('.fa-trash-o').click()
         self.logger.info('product was deleted')
         return self
+
+
